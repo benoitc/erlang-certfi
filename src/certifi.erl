@@ -6,6 +6,10 @@
 -export([cacertfile/0,
          cacerts/0]).
 
+-ifdef(TEST).
+-export([cacerts_test_data/0]).
+-endif.
+
 %% @doc CACertFile gives the path to the file with an X.509 certificate list
 %% containing the Mozilla CA Certificate that can then be used via the
 %% cacertfile setting in ssl options passed to the connect function.
@@ -29,4 +33,11 @@ cacertfile() ->
 %% passed to the connect function.
 -spec cacerts() -> [binary(),...].
 cacerts() ->
-    ok.
+    [].
+
+-ifdef(TEST).
+%% @doc CACertsTestData provides fixed certificates for testing.
+-spec cacerts_test_data() -> [binary(),...].
+cacerts_test_data() ->
+    [].
+-endif.
