@@ -12,8 +12,11 @@ reproducible_module_test() ->
 -endif.
 
 cacerts_test_() ->
+    %% Checking the contents is difficult because they change frequently.
+    %% Therefore, this test only checks the number and type of certificates.
     Certs = certifi:cacerts(),
     [?_assertEqual(?NUM_OF_CERTS, length(Certs))
+    ,?_assert(lists:all(fun is_binary/1, Certs))
     ].
 
 cacerts_test_data_test_() ->
